@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
-// import { Offer,OfferModel } from '../models/OfferModel';
+import { Offer,OfferModel } from '../models/OfferModel';
 
-// const productModel = new OfferModel;
+const offerModel = new OfferModel;
 export const CreateController = async (req: Request, res: Response,next:NextFunction) => {
     try {
-        // console.log(req.body);
-        // const offer:Offer=await OfferModel.createNewProduct(req.body)
+        console.log(req.body);
+        const offer:Offer=await offerModel.createNewoffer(req.body)
         res.json({
             status: 'success',
-            // data: { ...offer },
+            data: { ...offer },
             message: 'product created successfully'
         });
     } catch (err) {
@@ -19,9 +19,9 @@ export const CreateController = async (req: Request, res: Response,next:NextFunc
 export const DeleteOneController = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const id: number = parseInt(req.params.id as string);
-        //const deleteOne = await OfferModel.deleteById(id);
+        const deleteOne = await offerModel.deleteById(id);
         res.json({
-            //data:{deleteOne},
+            data:{deleteOne},
             message: 'products deleted successfully'
         })
     } catch(err) {
@@ -31,7 +31,7 @@ export const DeleteOneController = async (req: Request, res: Response,next:NextF
 
 export const DeleteAllController = async (req: Request, res: Response,next:NextFunction) => {
     try {
-        // const deleteAll = await OfferModel.deleteAll();
+        // const deleteAll = await offerModel.deleteAll();
         res.json({
             // data:{deleteAll},
             message: 'products deleted successfully'

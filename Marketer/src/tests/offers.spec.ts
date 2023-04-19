@@ -24,17 +24,27 @@ describe('test products endpoints', () => {
   //     connection.release();
   // });
 
-  it('should create new product', async () => {
+  it('should create new offer', async () => {
     const response = await request
     .post('/api/offers/add')
-    .send({
+      .send({
         name: 'product name',
         description: 'product description',
         price: 20,
     });
     expect(response.status).toBe(200);
-});
+  });
+  it('should delete offer', async () => {
+    const response = await request
+        .delete('/api/offers/delete/1')
+    expect(response.status).toBe(200);
+  });
 
+  it('should delete all offers', async () => {
+    const response = await request
+        .delete('/api/offers/deleteall')
+    expect(response.status).toBe(200);
+  });
 
 
 })

@@ -14,22 +14,13 @@ describe('Test endpoint response', () => {
   })
 })
 
-describe('test products endpoints', () => {
-  // afterAll(async () => {
-  //   // clean db
-  //     const connection = await db.connect();
-  //     const sql = `DELETE FROM products;
-  //                 ALTER SEQUENCE products_id_seq RESTART WITH 1;\n`;
-  //     await connection.query(sql);
-  //     connection.release();
-  // });
-
+describe('test offers endpoints', () => {
   it('should create new offer', async () => {
     const response = await request
     .post('/api/offers/add')
       .send({
-        name: 'product name',
-        description: 'product description',
+        name: 'offer name',
+        description: 'offer description',
         price: 20,
     });
     expect(response.status).toBe(200);

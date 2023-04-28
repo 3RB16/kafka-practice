@@ -2,9 +2,9 @@ import json
 
 from kafka import KafkaConsumer
 
-from api.models import Offer
-from api.serializers import OffersSerializer
-
+from utils import (
+    create_offer, update_offer, delete_offer
+)
 
 # Create a Kafka consumer.
 consumer = KafkaConsumer(
@@ -28,26 +28,10 @@ for message in consumer:
     offer = json.loads(message.value)
     # Determine the request type.
     if key == 'create-offer':
-        # The request is to create an offer.
-        offer_model = OffersSerializer(data = offer)
-        if offer_model.is_valid():
-            offer_model.save()
-        else:
-            print("bug here")
-            
+        create_offer(offer)    
     elif key == 'update-offer':
-        # The request is to update an offer.
-        try:
-            offer_model = OffersSerializer(data = offer,instance = Offer.objects.get(id = offer['id']))    
-            if offer_model.is_valid():
-                offer_model.save()
-        except Offer.DoesNotExist:
-            print("bug here")
+        update_offer(offer)
     elif key == 'delete-offer':
-        # The request is to delete an offer.
-        try:
-            Offer.objects.get(id = offer['id']).delete()
-        except Offer.DoesNotExist:
-            print("bug here")
+        delete_offer(offer)
 # Close the consumer.
 consumer.close()

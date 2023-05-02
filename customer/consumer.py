@@ -22,10 +22,9 @@ for message in consumer:
 
     # Display the offer on the console.
     print(message.value)
-
-    # Get the key of the message.
-    key = message.key
     offer = json.loads(message.value)
+    key = offer['type']
+    offer.pop('type' , None)
     # Determine the request type.
     if key == 'create-offer':
         create_offer(offer)    

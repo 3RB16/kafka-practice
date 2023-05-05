@@ -2,10 +2,15 @@
 from django.urls import path
 
 from .views import (
-    OffersList , OffersDetail
+    OffersList , 
+    OffersDetail, 
+    MarketerList, 
+    MarketerDetail
 )
 
 urlpatterns = [
-    path('' , OffersList.as_view(), name='offers'),
-    path('<int:pk>' , OffersDetail.as_view(), name='offers'),
+    path('crud/' , OffersList.as_view(), name='offer_customer'),
+    path('crud/<int:pk>' , OffersDetail.as_view(), name='offer_customer'),
+    path('offers/' , MarketerList.as_view() , name='offer_marketer'),
+    path('offers/<int:pk>' , MarketerDetail.as_view() , name='offer_marketer')
 ]

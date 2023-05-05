@@ -33,7 +33,7 @@ services:
     depends_on:
       - kafka
     image: app:django
-    container_name: customer
+    container_name: api
     command: python manage.py runserver 0.0.0.0:8000
   db:
     image: postgres
